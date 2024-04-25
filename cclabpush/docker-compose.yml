@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mongo_db:
+    container_name: data_container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+  app:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+       Google_ClientId: '533605971305-eb4tl7gjk8hrlvtquvkt64tldjjlcq3n.apps.googleusercontent.com'
+       Google_ClientSecret: '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'
+       Mongo_local: 'mongodb://mongo_db:27017/users'
+    depends_on:
+      - mongo_db
+volumes:
+  mongo_db: {}
+
